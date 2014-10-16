@@ -7,8 +7,8 @@
 ec2CostPerMonth <- function(events){
   eventsProcessableByM3MediumInstance <- 10000000
   nodes <- (events %/% eventsProcessableByM3MediumInstance) + 1
-  hoursInMonth <- 24 * 30
+  hoursPerMonth <- 24*365.25/12
   costOfM3Instance <- 0.098
-	nodes * hoursInMonth * costOfM3Instance
+	nodes * hoursPerMonth * costOfM3Instance
 }
 
