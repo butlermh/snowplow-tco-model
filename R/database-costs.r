@@ -23,13 +23,21 @@ redshiftNodesRequired <- function(eventsStored){
 
 # Amazon Redshift cost
 # Assumes  year reserved instance pricing and XL nodes (not 8XL nodes)
-redshiftEffectiveCostPerMonth <- function(numberOfNodes){
-	upfrontCostPerNode <- 3000
-	hourlyCostPerNode <- 0.114
+redshiftEffectiveCostPerMonth <- function(numberOfNodes, threeyears=FALSE){
 
-	# Cost per month = cost for entire 3 years / 36
-	threeYearCost <- (upfrontCostPerNode + hourlyCostPerNode * 24 * 365.25) * 3 * numberOfNodes
-	threeYearCost / 36
+  if (threeyears) {
+    upfrontCostPerNode <- 3000
+  	hourlyCostPerNode <- 0.114
+    # Cost per month = cost for entire 3 years / 36
+	  threeYearCost <- (upfrontCostPerNode + hourlyCostPerNode * 24 * 365.25) * 3 * numberOfNodes
+	  threeYearCost / 36
+  } else {
+    upfrontCostPerNode <- 2500
+  	hourlyCostPerNode <- 0.215
+    # Cost per month = cost for entire 3 years / 36
+	  oneYearCost <- (upfrontCostPerNode + hourlyCostPerNode * 24 * 365.25) * numberOfNodes
+	  oneYearCost / 12
+  }
 }
 
 
