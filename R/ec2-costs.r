@@ -6,7 +6,7 @@
 # * all requests served to users in the US
 ec2CostPerMonth <- function(events){
   eventsProcessableByM3MediumInstance <- 10000000
-  nodes <- (events %/% eventsProcessableByM3MediumInstance) + 1
+  nodes <- ceiling(events / eventsProcessableByM3MediumInstance)
   hoursPerMonth <- 24*365.25/12
   costOfM3Instance <- 0.098
 	nodes * hoursPerMonth * costOfM3Instance
