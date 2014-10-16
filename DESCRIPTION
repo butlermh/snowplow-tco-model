@@ -15,3 +15,4 @@ Collate:
     's3-costs.r'
     's3-snowplow-event-files-costs.r'
     'snowplow-costs.r'
+    'ec2-costs.r'

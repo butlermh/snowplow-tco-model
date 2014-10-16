@@ -8,7 +8,7 @@
 #' @param edgeLocations The number of different locations in Amazon's Cloudfront network that each generate an independent log when hit. We believe this number is between 10000 and 100000, but are not sure. (This has an impact on S3 costs)
 #'
 #' @export
-snowplowCostByMonth <- function(uniquesPerMonth, eventsPerMonth, runsPerDay, storageDatabase, numberOfMonths, edgeLocations, collector, managedService = TRUE){
+snowplowCostByMonth <- function(uniquesPerMonth, eventsPerMonth, runsPerDay, storageDatabase, numberOfMonths, edgeLocations, collector="cloudfront", managedService = TRUE){
 	
 	month <- seq(1, numberOfMonths, by=1)
 	
