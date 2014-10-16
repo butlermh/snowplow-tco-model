@@ -19,7 +19,7 @@ snowplowCostByMonth <- function(uniquesPerMonth, eventsPerMonth, runsPerDay, sto
     cloudfrontCost <- 0
   }
   if (collector=="clojure") {
-    ec2Cost <- ec2CostPerMonth(events)
+    ec2Cost <- ec2CostPerMonth(eventsPerMonth)
   } else {
     ec2Cost <- 0
   }
