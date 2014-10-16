@@ -28,7 +28,7 @@ redshiftEffectiveCostPerMonth <- function(numberOfNodes){
 	hourlyCostPerNode <- 0.114
 
 	# Cost per month = cost for entire 3 years / 36
-	threeYearCost <- (upfrontCostPerNode + hourlyCostPerNode * 24 * 365.25 * 3) * numberOfNodes
+	threeYearCost <- (upfrontCostPerNode + hourlyCostPerNode * 24 * 365.25) * 3 * numberOfNodes
 	threeYearCost / 36
 }
 
