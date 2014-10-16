@@ -39,7 +39,7 @@ s3CostPerMonth <- function(gigabytesSnowplowDataAlreadyInS3, eventsThisMonth, ru
 
 # Calculate the S3 cost per month, based on the volume of data stored, the number of PUT / COPY / POST /  LIST requests and the number of GET requests
 s3CostPerMonthRaw <- function(gigabytesStored, putCopyListRequests, getRequests){
-	storageCostPerGigabyte <- 0.095
+	storageCostPerGigabyte <- 0.03
 	putCopyPostListRequestPricePerThousandRequests <- 0.005
 	getRequestPricePerTenThousandRequests <- 0.004
 
