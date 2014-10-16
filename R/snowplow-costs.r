@@ -8,7 +8,7 @@
 #' @param edgeLocations The number of different locations in Amazon's Cloudfront network that each generate an independent log when hit. We believe this number is between 10000 and 100000, but are not sure. (This has an impact on S3 costs)
 #'
 #' @export
-snowplowCostByMonth <- function(uniquesPerMonth, eventsPerMonth, runsPerDay, storageDatabase, numberOfMonths, edgeLocations, collector){
+snowplowCostByMonth <- function(uniquesPerMonth, eventsPerMonth, runsPerDay, storageDatabase, numberOfMonths, edgeLocations, collector, managedService = TRUE){
 	
 	month <- seq(1, numberOfMonths, by=1)
 	
@@ -23,13 +23,18 @@ snowplowCostByMonth <- function(uniquesPerMonth, eventsPerMonth, runsPerDay, sto
   } else {
     ec2Cost <- 0
   }
+  if (managedService) {
+    managed <- 1000
+  } else {
+    managed <- 0
+  }
 	s3Cost <- s3CostByMonth(eventsPerMonth, runsPerDay, edgeLocations, numberOfMonths)
 	emrCost <- emrCostPerMonth(eventsPerMonth, runsPerDay)
 	databaseCost <- databaseCostByMonth(storageDatabase, eventsPerMonth, numberOfMonths)
 
 	# Combine above 4 costs in a single data frame:
-	snowplowCost <- data.frame(month, cloudfrontCost, s3Cost, emrCost, databaseCost, ec2Cost)
-	snowplowCost$totalCost <- snowplowCost$cloudfrontCost + snowplowCost$s3Cost + snowplowCost$emrCost + snowplowCost$databaseCost + ec2Cost
+	snowplowCost <- data.frame(month, cloudfrontCost, s3Cost, emrCost, databaseCost, ec2Cost, managed)
+	snowplowCost$totalCost <- snowplowCost$cloudfrontCost + snowplowCost$s3Cost + snowplowCost$emrCost + snowplowCost$databaseCost + ec2Cost + managed
 
 	# Now return the completed data frame
 	snowplowCost
