@@ -55,6 +55,8 @@ The `snowplowCostByMonth` function takes the following arguments, all of which *
 | `storageDatabase` | `string`  | The database that is used to store Snowplow data. This can be 'redshift' or 'postgres' |
 | `numberOfMonths`  | `integer` | The number of months that the model will run for |
 | `edgeLocations`   | `integer` | This is the number of locations on the Amazon Cloudfront network that generate a log file each time one of the associated nodes is hit. We are not sure how many of these exist in the Cloudfront network. (We guess there are 10k - 100k). This impacts S3 costs, because it determines how many log files are generated in each time period, and a certain number of requests are made per log file generated. |
+| `collector`       | `string`  | The type of collector used to receive Snowplow data. This can be 'cloudfront' or 'clojure' |
+| `managedService`  | `boolean` | Whether to include managed service costs in the calculation |
 
 For example, to find out how much Snowplow would cost for a user with 800k uniques per month, 5M events per month who uses PostgreSQL to store the data, we would run:
 
